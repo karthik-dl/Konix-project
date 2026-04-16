@@ -1,7 +1,7 @@
 import HoldingRow from "./HoldingRow";
 
 export default function HoldingTable({ holdings, selected, setSelected }) {
-  // Select all rows
+
   const handleSelectAll = () => {
     if (selected.length === holdings.length) {
 
@@ -11,14 +11,16 @@ export default function HoldingTable({ holdings, selected, setSelected }) {
     }
   };
 
-  // Toggle individual row
   const handleToggle = (item) => {
-    setSelected((prev) => {
-      const exists = prev.includes(item);
-      if (exists) return prev.filter((i) => i !== item);
+  setSelected((prev) => {
+    const exists = prev.find((i) => i.coin === item.coin);
+    if (exists) {
+      return prev.filter((i) => i.coin !== item.coin);
+    } else {
       return [...prev, item];
-    });
-  };
+    }
+  });
+};
 
   return (
     <div className="bg-white rounded-2xl shadow p-4">
@@ -42,14 +44,14 @@ export default function HoldingTable({ holdings, selected, setSelected }) {
         </thead>
 
         <tbody>
-          {holdings.map((item, index) => (
-            <HoldingRow
-              key={index}
-              item={item}
-              isSelected={selected.includes(item)}
-              onToggle={() => handleToggle(item)}
-            />
-          ))}
+          {holdings.map((item) => (
+  <HoldingRow
+    key={item.coin}   // ✅ FIX
+    item={item}
+    selected={selected}
+    onToggle={() => handleToggle(item)}
+  />
+))}
         </tbody>
       </table>
     </div>

@@ -62,7 +62,7 @@ export default function Dashboard() {
         <Card
           title="After Harvesting"
           data={harvestedGains}
-          savings={savings}
+          savings={preHarvest - postHarvest}
         />
       </div>
 
