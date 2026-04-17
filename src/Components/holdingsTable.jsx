@@ -51,62 +51,63 @@ export default function HoldingsTable({
       <div className="overflow-x-auto">
         <table className="min-w-[800px] w-full text-sm">
           <thead>
-  <tr
-    className={`text-sm ${
-      darkMode
-        ? "bg-[#1f2937] text-gray-300"
-        : "bg-gray-100 text-gray-600"
-    }`}
-  >
-    
-    <th className="px-3 py-2">
-      <input
-        type="checkbox"
-        checked={
-          holdings.length > 0 &&
-          selected.length === holdings.length
-        }
-        onChange={handleSelectAll}
-      />
-    </th>
+            <tr
+              className={`text-sm ${
+                darkMode
+                  ? "bg-[#1f2937] text-gray-300"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              {/* Select all */}
+              <th className="px-3 py-2">
+                <input
+                  type="checkbox"
+                  checked={
+                    holdings.length > 0 &&
+                    selected.length === holdings.length
+                  }
+                  onChange={handleSelectAll}
+                />
+              </th>
 
-    <th className="px-3 py-2 text-left whitespace-nowrap">
-      Asset
-    </th>
+              <th className="px-3 py-2 text-left whitespace-nowrap">
+                Asset
+              </th>
 
-    <th className="px-3 py-2 text-right whitespace-nowrap">
-      Holdings
-    </th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">
+                Holdings
+              </th>
 
-    <th className="px-3 py-2 text-right whitespace-nowrap">
-      Total Current Value
-    </th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">
+                Total Current Value
+              </th>
 
-    <th
-      onClick={() =>
-        setSortOrder((prev) =>
-          prev === "asc" ? "desc" : "asc"
-        )
-      }
-      className="px-3 py-2 text-right whitespace-nowrap cursor-pointer"
-    >
-      Short-term{" "}
-      {sortOrder === "asc"
-        ? "↑"
-        : sortOrder === "desc"
-        ? "↓"
-        : ""}
-    </th>
+              {/* Sortable column */}
+              <th
+                onClick={() =>
+                  setSortOrder((prev) =>
+                    prev === "asc" ? "desc" : "asc"
+                  )
+                }
+                className="px-3 py-2 text-right whitespace-nowrap cursor-pointer"
+              >
+                Short-term{" "}
+                {sortOrder === "asc"
+                  ? "↑"
+                  : sortOrder === "desc"
+                  ? "↓"
+                  : ""}
+              </th>
 
-    <th className="px-3 py-2 text-right whitespace-nowrap">
-      Long-Term
-    </th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">
+                Long-Term
+              </th>
 
-    <th className="px-3 py-2 text-right whitespace-nowrap">
-      Amount to Sell
-    </th>
-  </tr>
-</thead>
+              <th className="px-3 py-2 text-right whitespace-nowrap">
+                Amount to Sell
+              </th>
+            </tr>
+          </thead>
 
           <tbody>
             {(showAll
@@ -118,12 +119,22 @@ export default function HoldingsTable({
                 item={item}
                 selected={selected}
                 onToggle={() => handleToggle(item)}
-                darkMode={darkMode}   
+                darkMode={darkMode}
               />
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* ✅ VIEW ALL BUTTON */}
+      {holdings.length > 5 && (
+        <p
+          onClick={() => setShowAll(!showAll)}
+          className="text-blue-600 text-sm mt-3 cursor-pointer hover:underline text-center"
+        >
+          {showAll ? "Show less" : "View all"}
+        </p>
+      )}
     </div>
   );
 }
