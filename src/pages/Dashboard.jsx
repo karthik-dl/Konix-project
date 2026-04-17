@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { getHoldings, getCapitalGains } from "../services/api";
+import { getHoldings, getCapitalGains } from "../services/api.js";
 import {
   calculateRealised,
   updateAfterHarvesting,
-} from "../utils/calculations";
+} from "../utils/calculations.js";
 
-import Card from "../components/card";
-import HoldingsTable from "../components/holdingsTable";
-
+import Card from "../components/card.jsx";
+import HoldingsTable from "../components/holdingsTable.jsx";
 export default function Dashboard({ darkMode }) {
   const [holdings, setHoldings] = useState([]);
   const [capitalGains, setCapitalGains] = useState(null);

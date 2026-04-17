@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard.jsx";
 import logo from "./assets/images.png";
 
 

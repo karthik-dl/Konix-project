@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HoldingRow from "./holdingRow";
+import HoldingRow from "./holdingRow.jsx";
 
 export default function HoldingsTable({
   holdings,
