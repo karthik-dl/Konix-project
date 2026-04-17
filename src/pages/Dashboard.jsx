@@ -3,7 +3,7 @@ import { getHoldings, getCapitalGains } from "../services/api.js";
 import {
   calculateRealised,
   updateAfterHarvesting,
-} from "../utils/calculations.js";
+} from "../utils/Calculations.js";
 
 import Card from "../Components/card.jsx";
 import HoldingsTable from "../Components/holdingsTable.jsx";
