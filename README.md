@@ -6,7 +6,7 @@ It allows users to view their capital gains, select assets, and see how selling 
 
 
 ##  Live Demo
- https://your-live-link.com
+https://konix-project-opal.vercel.app/
 
 
 ##  GitHub Repository
