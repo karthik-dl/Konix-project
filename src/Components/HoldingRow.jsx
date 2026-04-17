@@ -1,49 +1,53 @@
-export default function HoldingRow({ item, selected, onToggle }) {
+export default function HoldingRow({ item, selected, onToggle, darkMode }) {
   const isSelected = selected?.some((i) => i.coin === item.coin);
 
   return (
     <tr
-      className={`border-b hover:bg-gray-50 transition ${
-        isSelected ? "bg-[#f0f6ff]" : ""
+      className={`border-b transition ${
+        darkMode
+          ? "border-gray-700 hover:bg-[#1f2937]"
+          : "hover:bg-gray-50"
+      } ${
+        isSelected
+          ? darkMode
+            ? "bg-[#1e3a8a]"
+            : "bg-[#f0f6ff]"
+          : ""
       }`}
     >
-      {/* Checkbox */}
-      <td className="px-3 py-3 align-middle">
+      <td className="px-3 py-3">
         <input
           type="checkbox"
           checked={isSelected}
           onChange={onToggle}
-          className="cursor-pointer"
         />
       </td>
 
-      {/* Asset */}
       <td className="px-3 py-3 whitespace-nowrap">
         <div className="flex items-center gap-3">
           <img src={item.logo} className="w-6 h-6" />
           <div>
-            <p className="font-medium">{item.coin}</p>
+            <p className={`font-medium ${darkMode ? "text-white" : ""}`}>
+              {item.coin}
+            </p>
             <p className="text-xs text-gray-400">{item.coinName}</p>
           </div>
         </div>
       </td>
 
-      {/* Holdings */}
-      <td className="px-3 py-3 text-right">
+      <td className="px-3 py-3 text-right whitespace-nowrap">
         <p>{item.totalHolding} {item.coin}</p>
         <p className="text-xs text-gray-400">
           ₹{Number(item.currentPrice).toLocaleString("en-IN")} / {item.coin}
         </p>
       </td>
 
-      {/* Total Current Value */}
-      <td className="px-3 py-3 text-right">
+      <td className="px-3 py-3 text-right whitespace-nowrap">
         ₹{(item.totalHolding * item.currentPrice).toLocaleString("en-IN")}
       </td>
 
-      {/* STCG */}
       <td
-        className={`px-3 py-3 text-right ${
+        className={`px-3 py-3 text-right whitespace-nowrap ${
           item.stcg.gain >= 0 ? "text-green-600" : "text-red-500"
         }`}
       >
@@ -56,9 +60,8 @@ export default function HoldingRow({ item, selected, onToggle }) {
         </p>
       </td>
 
-      {/* LTCG */}
       <td
-        className={`px-3 py-3 text-right ${
+        className={`px-3 py-3 text-right whitespace-nowrap ${
           item.ltcg.gain >= 0 ? "text-green-600" : "text-red-500"
         }`}
       >
@@ -71,8 +74,7 @@ export default function HoldingRow({ item, selected, onToggle }) {
         </p>
       </td>
 
-      {/* Amount to Sell */}
-      <td className="px-3 py-3 text-right">
+      <td className="px-3 py-3 text-right whitespace-nowrap">
         {isSelected ? `${item.totalHolding} ${item.coin}` : "-"}
       </td>
     </tr>

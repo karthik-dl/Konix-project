@@ -1,12 +1,17 @@
 import { useState } from "react";
 import HoldingRow from "./HoldingRow";
 
-export default function HoldingsTable({ holdings, selected, setSelected }) {
+export default function HoldingsTable({
+  holdings,
+  selected,
+  setSelected,
+  darkMode,
+}) {
   holdings = holdings || [];
   selected = selected || [];
 
   const [showAll, setShowAll] = useState(false);
-  const [sortOrder, setSortOrder] = useState(null); // asc | desc
+  const [sortOrder, setSortOrder] = useState(null);
 
   const handleSelectAll = () => {
     if (selected.length === holdings.length) {
@@ -25,79 +30,83 @@ export default function HoldingsTable({ holdings, selected, setSelected }) {
     });
   };
 
-  // 🔥 SORT LOGIC
   let sortedHoldings = [...holdings];
 
   if (sortOrder) {
-    sortedHoldings.sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.stcg.gain - b.stcg.gain;
-      } else {
-        return b.stcg.gain - a.stcg.gain;
-      }
-    });
+    sortedHoldings.sort((a, b) =>
+      sortOrder === "asc"
+        ? a.stcg.gain - b.stcg.gain
+        : b.stcg.gain - a.stcg.gain
+    );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow p-4">
+    <div
+      className={`rounded-2xl shadow p-4 ${
+        darkMode ? "bg-[#111827] text-white" : "bg-white"
+      }`}
+    >
       <h2 className="text-lg font-medium mb-4">Holdings</h2>
 
-      {/* Responsive wrapper */}
       <div className="overflow-x-auto">
         <table className="min-w-[800px] w-full text-sm">
           <thead>
-            <tr className="bg-gray-100 text-gray-600 text-sm">
-              
-              {/* Select all */}
-              <th className="px-3 py-2 whitespace-nowrap">
-                <input
-                  type="checkbox"
-                  checked={
-                    holdings.length > 0 &&
-                    selected.length === holdings.length
-                  }
-                  onChange={handleSelectAll}
-                />
-              </th>
+  <tr
+    className={`text-sm ${
+      darkMode
+        ? "bg-[#1f2937] text-gray-300"
+        : "bg-gray-100 text-gray-600"
+    }`}
+  >
+    
+    <th className="px-3 py-2">
+      <input
+        type="checkbox"
+        checked={
+          holdings.length > 0 &&
+          selected.length === holdings.length
+        }
+        onChange={handleSelectAll}
+      />
+    </th>
 
-              <th className="px-3 py-2 text-left whitespace-nowrap">
-                Asset
-              </th>
+    <th className="px-3 py-2 text-left whitespace-nowrap">
+      Asset
+    </th>
 
-              <th className="px-3 py-2 text-right whitespace-nowrap">
-                Holdings
-              </th>
+    <th className="px-3 py-2 text-right whitespace-nowrap">
+      Holdings
+    </th>
 
-              <th className="px-3 py-2 text-right whitespace-nowrap">
-                Total Current Value
-              </th>
+    <th className="px-3 py-2 text-right whitespace-nowrap">
+      Total Current Value
+    </th>
 
-              {/* 🔥 SORTABLE COLUMN */}
-              <th
-                onClick={() =>
-                  setSortOrder((prev) =>
-                    prev === "asc" ? "desc" : "asc"
-                  )
-                }
-                className="px-3 py-2 text-right whitespace-nowrap cursor-pointer"
-              >
-                Short-term{" "}
-                {sortOrder === "asc"
-                  ? "↑"
-                  : sortOrder === "desc"
-                  ? "↓"
-                  : ""}
-              </th>
+    <th
+      onClick={() =>
+        setSortOrder((prev) =>
+          prev === "asc" ? "desc" : "asc"
+        )
+      }
+      className="px-3 py-2 text-right whitespace-nowrap cursor-pointer"
+    >
+      Short-term{" "}
+      {sortOrder === "asc"
+        ? "↑"
+        : sortOrder === "desc"
+        ? "↓"
+        : ""}
+    </th>
 
-              <th className="px-3 py-2 text-right whitespace-nowrap">
-                Long-Term
-              </th>
+    <th className="px-3 py-2 text-right whitespace-nowrap">
+      Long-Term
+    </th>
 
-              <th className="px-3 py-2 text-right whitespace-nowrap">
-                Amount to Sell
-              </th>
-            </tr>
-          </thead>
+    <th className="px-3 py-2 text-right whitespace-nowrap">
+      Amount to Sell
+    </th>
+  </tr>
+</thead>
 
           <tbody>
             {(showAll
@@ -109,21 +118,12 @@ export default function HoldingsTable({ holdings, selected, setSelected }) {
                 item={item}
                 selected={selected}
                 onToggle={() => handleToggle(item)}
+                darkMode={darkMode}   
               />
             ))}
           </tbody>
         </table>
       </div>
-
-      {/* View toggle */}
-      {holdings.length > 5 && (
-        <p
-          onClick={() => setShowAll(!showAll)}
-          className="text-blue-600 text-sm mt-3 cursor-pointer hover:underline"
-        >
-          {showAll ? "Show less" : "View all"}
-        </p>
-      )}
     </div>
   );
 }

@@ -7,9 +7,8 @@ import {
 
 import Card from "../Components/Card";
 import HoldingsTable from "../Components/HoldingsTable";
-import logo from "../assets/images.png";
 
-export default function Dashboard() {
+export default function Dashboard({ darkMode }) {
   const [holdings, setHoldings] = useState([]);
   const [capitalGains, setCapitalGains] = useState(null);
   const [selectedAssets, setSelectedAssets] = useState([]);
@@ -60,45 +59,37 @@ export default function Dashboard() {
 
   const savings = pre - post;
 
-return (
-  <div className="min-h-screen bg-[#f3f4f6]">
-
-    {/* 🔥 FULL WIDTH HEADER */}
-<div className="bg-white border-b border-gray-200">
-  <div className="max-w-7xl mx-auto px-6 py-3 flex items-center">
-    
-    <img
-      src={logo}
-      alt="KoinX Logo"
-      className="h-14 w-auto"
-    />
-
-  </div>
-</div>
-
-    {/* 🔥 MAIN CONTENT */}
+  return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-      {/* Title + How it works */}
       <div className="space-y-3 relative">
-
         <div className="flex items-center gap-4">
-          <h1 className="text-[22px] font-medium text-gray-800">
+          <h1 className={`text-[22px] font-medium ${darkMode ? "text-white" : "text-gray-800"}`}>
             Tax Harvesting
           </h1>
 
           <button
             onClick={() => setShowInfo(!showInfo)}
-            className="text-blue-600 text-sm hover:underline"
+            className="text-blue-500 text-sm hover:underline"
           >
             How it works?
           </button>
         </div>
 
-        {/* Tooltip */}
+
         {showInfo && (
-          <div className="absolute top-10 left-44 w-80 bg-white shadow-lg rounded-xl p-4 text-sm text-gray-700 z-50">
-            <div className="absolute -top-2 left-6 w-4 h-4 bg-white rotate-45"></div>
+          <div
+            className={`absolute top-10 left-44 w-80 shadow-lg rounded-xl p-4 text-sm z-50 ${
+              darkMode
+                ? "bg-[#1f2937] text-gray-200"
+                : "bg-white text-gray-700"
+            }`}
+          >
+            <div
+              className={`absolute -top-2 left-6 w-4 h-4 rotate-45 ${
+                darkMode ? "bg-[#1f2937]" : "bg-white"
+              }`}
+            ></div>
 
             <ul className="space-y-2">
               <li>• See your capital gains for FY 2024–25</li>
@@ -106,27 +97,36 @@ return (
               <li>• Instantly view updated gains</li>
             </ul>
 
-            <p className="mt-3 text-xs text-gray-500">
+            <p className="mt-3 text-xs text-gray-400">
               <strong>Pro tip:</strong> Try combinations to optimize taxes
             </p>
           </div>
         )}
       </div>
 
-      {/* 🔥 DISCLAIMER */}
       <div
         onClick={() => setShowDisclaimer(!showDisclaimer)}
-        className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-[13px] hover:border-blue-400 transition cursor-pointer"
+        className={`rounded-lg px-4 py-2 text-[13px] cursor-pointer transition ${
+          darkMode
+            ? "bg-[#1e3a8a] border border-blue-500 text-white"
+            : "bg-blue-50 border border-blue-200 hover:border-blue-400"
+        }`}
       >
-        <div className="flex items-center gap-2 text-gray-800 font-medium text-sm">
-    <div className="w-5 h-5 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-xs">
-      i
-    </div>
-    <span>Important Notes & Disclaimers</span>
-  </div>
+        <div className="flex items-center gap-2 font-medium text-sm">
+          <div className="w-5 h-5 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-xs">
+            i
+          </div>
+          <span>Important Notes & Disclaimers</span>
+        </div>
 
         {showDisclaimer && (
-          <div className="mt-2 pt-2 border-t border-blue-200 text-gray-600">
+          <div
+            className={`mt-2 pt-2 border-t ${
+              darkMode
+                ? "border-blue-400 text-gray-200"
+                : "border-blue-200 text-gray-600"
+            }`}
+          >
             <ul className="list-disc ml-5 space-y-2">
               <li>Tax-loss harvesting helps reduce taxes</li>
               <li>Short-term and long-term gains differ</li>
@@ -138,20 +138,30 @@ return (
         )}
       </div>
 
-      {/* 🔥 CARDS */}
+     
       <div className="grid md:grid-cols-2 gap-5">
-        <Card title="Pre Harvesting" data={capitalGains} dark />
-        <Card title="After Harvesting" data={updated} savings={savings} />
+        <Card
+          title="Pre Harvesting"
+          data={capitalGains}
+          dark
+          darkMode={darkMode}
+        />
+        <Card
+          title="After Harvesting"
+          data={updated}
+          savings={savings}
+          darkMode={darkMode}
+        />
       </div>
 
-      {/* 🔥 TABLE */}
+      
       <HoldingsTable
         holdings={holdings}
         selected={selectedAssets}
         setSelected={setSelectedAssets}
+        darkMode={darkMode}
       />
 
     </div>
-  </div>
-)
+  );
 }
