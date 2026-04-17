@@ -5,8 +5,8 @@ import {
   updateAfterHarvesting,
 } from "../utils/calculations";
 
-import Card from "../components/Card";
-import HoldingsTable from "../components/HoldingsTable";
+import Card from "../components/card";
+import HoldingsTable from "../components/holdingsTable";
 
 export default function Dashboard({ darkMode }) {
   const [holdings, setHoldings] = useState([]);
