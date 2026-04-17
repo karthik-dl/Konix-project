@@ -5,8 +5,8 @@ import {
   updateAfterHarvesting,
 } from "../utils/calculations.js";
 
-import Card from "../components/card.jsx";
-import HoldingsTable from "../components/holdingsTable.jsx";
+import Card from "../Components/card.jsx";
+import HoldingsTable from "../Components/holdingsTable.jsx";
 export default function Dashboard({ darkMode }) {
   const [holdings, setHoldings] = useState([]);
   const [capitalGains, setCapitalGains] = useState(null);
