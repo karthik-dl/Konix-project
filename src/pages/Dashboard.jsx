@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getHoldings, getCapitalGains } from "../services/api";
-import { updateAfterHarvesting, calculateRealised } from "../utils/Calculations";
+import {calculateRealised,updateAfterHarvesting,} from "../utils/Calculations";
+import Card from "../Components/Card";
 import HoldingsTable from "../Components/HoldingsTable";
-import Card from "../Components/Card"
 
 export default function Dashboard() {
   const [holdings, setHoldings] = useState([]);
@@ -10,48 +10,25 @@ export default function Dashboard() {
   const [selectedAssets, setSelectedAssets] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch initial data
   useEffect(() => {
     async function fetchData() {
-      try {
-        const [holdingsData, gainsData] = await Promise.all([
-          getHoldings(),
-          getCapitalGains(),
-        ]);
-
-        setHoldings(holdingsData);
-        setCapitalGains(gainsData);
-      } catch (err) {
-        console.error("Error fetching data", err);
-      } finally {
-        setLoading(false);
-      }
+      const [h, g] = await Promise.all([
+        getHoldings(),
+        getCapitalGains(),
+      ]);
+      setHoldings(h);
+      setCapitalGains(g);
+      setLoading(false);
     }
-
     fetchData();
   }, []);
 
-  if (loading) {
-    return <p className="text-center mt-10">Loading data...</p>;
-  }
+  if (loading) return <p className="text-center p-10">Loading...</p>;
 
-  // Calculate updated gains after user selection
-  const harvestedGains = updateAfterHarvesting(
-    capitalGains,
-    selectedAssets
-  );
+  const updated = updateAfterHarvesting(capitalGains, selectedAssets);
 
-  const preHarvest = calculateRealised(
-    capitalGains.stcg,
-    capitalGains.ltcg
-  );
-
-  const postHarvest = calculateRealised(
-    harvestedGains.stcg,
-    harvestedGains.ltcg
-  );
-
-  const savings = preHarvest - postHarvest;
+  const pre = calculateRealised(capitalGains.stcg, capitalGains.ltcg);
+  const post = calculateRealised(updated.stcg, updated.ltcg);
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -59,11 +36,7 @@ export default function Dashboard() {
 
       <div className="grid md:grid-cols-2 gap-6">
         <Card title="Pre Harvesting" data={capitalGains} dark />
-        <Card
-          title="After Harvesting"
-          data={harvestedGains}
-          savings={preHarvest - postHarvest}
-        />
+        <Card title="After Harvesting" data={updated} savings={pre - post} />
       </div>
 
       <HoldingsTable

@@ -40,6 +40,7 @@ export default function HoldingTable({ holdings, selected, setSelected }) {
             <th>Current Price</th>
             <th>STCG</th>
             <th>LTCG</th>
+            <th>Amount to Sell</th>
           </tr>
         </thead>
 
