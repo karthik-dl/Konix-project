@@ -94,6 +94,86 @@ export const getHoldings = () => {
     ltcg: { gain: 0, balance: 0 },
   },
   {
+  coin: "BTC",
+  coinName: "Bitcoin",
+  logo: "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png",
+  currentPrice: 5000000,
+  totalHolding: 0.01,
+  averageBuyPrice: 6000000,
+  stcg: {
+    balance: 0.01,
+    gain: -10000
+  },
+  ltcg: {
+    balance: 0,
+    gain: 0
+  }
+},
+{
+  coin: "DOGE",
+  coinName: "Dogecoin",
+  logo: "https://coin-images.coingecko.com/coins/images/5/large/dogecoin.png",
+  currentPrice: 10,
+  totalHolding: 100,
+  averageBuyPrice: 15,
+  stcg: {
+    balance: 100,
+    gain: -500
+  },
+  ltcg: {
+    balance: 0,
+    gain: 0
+  }
+},
+{
+  coin: "AVAX",
+  coinName: "Avalanche",
+  logo: "https://coin-images.coingecko.com/coins/images/12559/large/Avalanche_Circle_RedWhite_Trans.png",
+  currentPrice: 2500,
+  totalHolding: 2,
+  averageBuyPrice: 3500,
+  stcg: {
+    balance: 2,
+    gain: -2000
+  },
+  ltcg: {
+    balance: 0,
+    gain: 0
+  }
+},
+{
+  coin: "ADA",
+  coinName: "Cardano",
+  logo: "https://coin-images.coingecko.com/coins/images/975/large/cardano.png",
+  currentPrice: 50,
+  totalHolding: 50,
+  averageBuyPrice: 80,
+  stcg: {
+    balance: 50,
+    gain: -1500
+  },
+  ltcg: {
+    balance: 0,
+    gain: 0
+  }
+},
+{
+  coin: "XRP",
+  coinName: "Ripple",
+  logo: "https://coin-images.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png",
+  currentPrice: 60,
+  totalHolding: 30,
+  averageBuyPrice: 90,
+  stcg: {
+    balance: 30,
+    gain: -900
+  },
+  ltcg: {
+    balance: 0,
+    gain: 0
+  }
+},
+  {
     coin: "EZ",
     coinName: "EasyFi V2",
     logo: "https://koinx-statics.s3.ap-south-1.amazonaws.com/currencies/DefaultCoin.svg",
