@@ -2,33 +2,67 @@ export default function HoldingRow({ item, selected, onToggle }) {
   const isSelected = selected?.some((i) => i.coin === item.coin);
 
   return (
-    <tr className={`border-b hover:bg-gray-50 ${isSelected ? "bg-blue-50" : ""}`}>
-      <td>
-        <input type="checkbox" checked={isSelected} onChange={onToggle} />
+    <tr
+      className={`border-b hover:bg-gray-50 transition ${
+        isSelected ? "bg-blue-50" : ""
+      }`}
+    >
+      {/* Checkbox */}
+      <td className="px-3 py-3">
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={onToggle}
+          className="cursor-pointer"
+        />
       </td>
 
-      <td className="flex items-center gap-3 py-3">
-        <img src={item.logo} className="w-6 h-6" />
-        <div>
-          <p>{item.coin}</p>
-          <p className="text-xs text-gray-400">{item.coinName}</p>
+      {/* Asset */}
+      <td className="px-3 py-3">
+        <div className="flex items-center gap-3">
+          <img src={item.logo} className="w-6 h-6" />
+          <div>
+            <p className="font-medium">{item.coin}</p>
+            <p className="text-xs text-gray-400">{item.coinName}</p>
+          </div>
         </div>
       </td>
 
-      <td>{item.totalHolding}</td>
+      {/* Holdings */}
+      <td className="px-3 py-3 text-right">
+        <p>{item.totalHolding}</p>
+        <p className="text-xs text-gray-400">
+          ₹{Number(item.currentPrice).toLocaleString("en-IN")}
+        </p>
+      </td>
 
-      <td>₹{Number(item.averageBuyPrice).toLocaleString("en-IN")}</td>
-      <td>₹{Number(item.currentPrice).toLocaleString("en-IN")}</td>
+      {/* Total Current Value (NEW - Figma) */}
+      <td className="px-3 py-3 text-right">
+        ₹{(item.totalHolding * item.currentPrice).toLocaleString("en-IN")}
+      </td>
 
-      <td className={item.stcg.gain >= 0 ? "text-green-600" : "text-red-500"}>
+      {/* STCG */}
+      <td
+        className={`px-3 py-3 text-right ${
+          item.stcg.gain >= 0 ? "text-green-600" : "text-red-500"
+        }`}
+      >
         ₹{Number(item.stcg.gain).toLocaleString("en-IN")}
       </td>
 
-      <td className={item.ltcg.gain >= 0 ? "text-green-600" : "text-red-500"}>
+      {/* LTCG */}
+      <td
+        className={`px-3 py-3 text-right ${
+          item.ltcg.gain >= 0 ? "text-green-600" : "text-red-500"
+        }`}
+      >
         ₹{Number(item.ltcg.gain).toLocaleString("en-IN")}
       </td>
 
-      <td>{isSelected ? item.totalHolding : "-"}</td>
+      {/* Amount to Sell */}
+      <td className="px-3 py-3 text-right">
+        {isSelected ? item.totalHolding : "-"}
+      </td>
     </tr>
   );
 }
