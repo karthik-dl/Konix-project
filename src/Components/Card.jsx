@@ -49,7 +49,7 @@ export default function Card({ title, data, dark, savings, darkMode }) {
       </div>
 
       {!dark && savings > 0 && (
-        <p className="text-sm mt-2">🎉 Save ₹{savings}</p>
+        <p className="text-sm mt-2">Save ₹{savings}</p>
       )}
     </div>
   );

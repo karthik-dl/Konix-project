@@ -188,8 +188,6 @@ export const getHoldings = () => {
   });
 };
 
-
-// MOCK CAPITAL GAINS API  ✅ THIS WAS MISSING
 export const getCapitalGains = () => {
   return new Promise((resolve) => {
     setTimeout(() => {

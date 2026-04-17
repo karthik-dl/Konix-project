@@ -1,16 +1,70 @@
-# React + Vite
+# Tax Harvesting Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React-based dashboard built to understand and simulate tax-loss harvesting.
 
-Currently, two official plugins are available:
+It allows users to view their capital gains, select assets, and see how selling certain assets can help reduce tax liability.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+##  Live Demo
+ https://your-live-link.com
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+##  GitHub Repository
+https://github.com/karthik-dl/Konix-project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## What I Built
+
+- A dashboard to display Short-Term and Long-Term Capital Gains  
+- Selection feature to choose assets for harvesting  
+- Real-time calculation of updated gains after selection  
+- “Amount to Sell” logic based on selected assets  
+- Sorting feature on short-term gains  
+- View toggle (show limited / full data)  
+- Dark mode toggle for better UI experience  
+
+
+
+## Key Features
+
+- Select individual assets or all assets  
+- Dynamic updates when assets are selected  
+- Clean and responsive table UI  
+- Tooltip and disclaimer section  
+- Sorting functionality  
+- Dark mode support  
+
+
+## Tech Stack
+
+- React.js  
+- Tailwind CSS  
+- JavaScript  
+
+---
+
+## Project Structure
+
+
+src/
+    Components/
+        Card.jsx
+        HoldingsTable.jsx
+        HoldingRow.jsx
+
+    pages/
+        Dashboard.jsx
+
+    services/
+        api.js
+
+    utils/
+        calculations.js
+
+
+## How to Run
+
+bash
+npm install
+npm run dev

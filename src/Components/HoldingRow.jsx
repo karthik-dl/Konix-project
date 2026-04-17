@@ -1,3 +1,4 @@
+import React from "react";
 export default function HoldingRow({ item, selected, onToggle, darkMode }) {
   const isSelected = selected?.some((i) => i.coin === item.coin);
 
